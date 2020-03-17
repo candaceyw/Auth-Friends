@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { axiosWithAuth } from '../utils/axiosWithAuth';
 import { Redirect } from 'react-router-dom';
 
 const Login = props => {
   const [user, setUser] = useState({});
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [Loggedin, setLoggedIn] = useState(false);
   const updateUser = e => {
     setUser({
       ...user,
@@ -19,7 +19,7 @@ const Login = props => {
       .then(res => {
         console.log(res);
         localStorage.setItem('token', res.data.payload);
-        props.history.push('/friends');
+        props.history.push('/protected');
       })
       .catch(err => console.log(err.response));
     console.log('err');
@@ -45,7 +45,7 @@ const Login = props => {
           onChange={updateUser}
         ></input>
 
-        <button className='waves-effect waves-light btn-large'>Log in</button>
+        <button className='waves-effect waves-light btn-large deep-orange darken-3'>Log in</button>
       </form>
     </div>
   );

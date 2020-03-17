@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { axiosWithAuth } from '../../utils/axiosWithAuth';
-import M from 'materialize-css/dist/js/materialize.min.js';
+// import M from 'materialize-css/dist/js/materialize.min.js';
 
 const AddFriend = props => {
   const [friend, setFriend] = useState({
@@ -22,7 +22,7 @@ const AddFriend = props => {
 
     axiosWithAuth()
       .post('/friends', friend)
-      .then(res => {
+      .then(res => { 
         console.log(res);
       })
       .catch(err => {
@@ -59,10 +59,6 @@ const AddFriend = props => {
   );
 };
 
-const modalStyle = {
-  width: '75%',
-  height: '75%'
-};
 
 const friendStyle = {
   width: '75%',

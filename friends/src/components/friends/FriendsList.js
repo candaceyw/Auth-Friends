@@ -1,23 +1,37 @@
 import React, { useEffect, useState } from 'react';
 import { axiosWithAuth } from '../../utils/axiosWithAuth';
-import M from 'materialize-css/dist/js/materialize.min.js';
-import AddFriend from './AddFriend';
-import AddBtn from '../../layout/AddBtn';
 
-const FriendsList = props => {
-  const [updated, setUpdate] = useState(false);
-  const [friend, setFriend] = useState({});
+
+const FriendsList = () => {
   const [friends, setFriends] = useState([]);
+
 
   useEffect(() => {
     axiosWithAuth()
       .get('/friends')
       .then(res =>
-        // console.log(res.data)
         setFriends(res.data)
       )
       .catch(err => console.log(err.response));
-  }, [updated]);
+  }, []);
+
+
+  const deleteFriend = (friend) => {
+    console.log(friend.id)
+    axiosWithAuth()
+    .delete(`/friends/${friend.id}`)
+    .then(res => {
+      setFriends([
+        ...res.data
+      ]) 
+      console.log('delete: ', res.data);
+    })
+    .catch(err => {
+      console.log('err: ', err);
+    })
+    setFriends(friends.filter( friend => friend.id!==friend.id))
+
+  }
 
   return (
     <ul className='collection with-header' style={friendStyle}>
@@ -25,8 +39,8 @@ const FriendsList = props => {
         <h1 className='center'>Friends</h1>
       </li>
       {friends.map(friend => (
-        <li className='collection-item'>
-          <div key={friend.id}>
+        <li className='collection-item'key={friend.id}>
+          <div >
             <br />
             <span className='grey-text'>
               <span className='black-text'>
@@ -37,7 +51,7 @@ const FriendsList = props => {
               <br />
               <span className='black-text'>Email: {friend.email}</span>
             </span>
-            <a href='#!' className='secondary-content'>
+            <a href='#!' onClick={deleteFriend} className='secondary-content'>
               <i className='material-icons grey-text'>delete</i>
             </a>
           </div>
@@ -49,7 +63,8 @@ const FriendsList = props => {
 
 const friendStyle = {
   width: '75%',
-  margin: 'auto'
+  margin: 'auto',
+  marginBottom: '30px'
 };
 
 export default FriendsList;

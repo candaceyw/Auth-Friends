@@ -1,7 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
 import 'materialize-css/dist/css/materialize.min.css';
-import { getToken } from './utils/axiosWithAuth';
 import ProtectedRoute from './components/PrivateRoute';
 
 import Login from './components/Login';
@@ -11,7 +10,7 @@ import Logout from './components/Logout';
 import AddFriend from './components/friends/AddFriend';
 
 function App() {
-  const signedIn = getToken();
+
 
   return (
     <Router>
