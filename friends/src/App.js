@@ -7,9 +7,8 @@ import ProtectedRoute from './components/PrivateRoute';
 import Login from './components/Login';
 import FriendsList from './components/friends/FriendsList';
 import PrivateRoute from './components/PrivateRoute';
-// import Navbar from './layout/Navbar';
+import Logout from './components/Logout';
 import AddFriend from './components/friends/AddFriend';
-import AddBtn from './layout/AddBtn';
 
 function App() {
   const signedIn = getToken();
@@ -31,6 +30,9 @@ function App() {
             <li>
               <Link to='/addfriend'>Add Friend</Link>
             </li>
+            <li>
+              <Link to='/logout'>Logout</Link>
+            </li>
           </ul>
         </div>
       </nav>
@@ -45,6 +47,9 @@ function App() {
         <li>
           <Link to='/addfriend'>Add Friend</Link>
         </li>
+        <li>
+          <Link to='/logout'>Logout</Link>
+        </li>
       </ul>
       <div className='container'></div>
 
@@ -52,6 +57,7 @@ function App() {
         <Route exact path='/login' component={Login} />
         <PrivateRoute exact path='/protected' component={FriendsList} />
         <PrivateRoute exact path='/addfriend' component={AddFriend} />
+        <ProtectedRoute exact path='/logout' component={Logout} />
       </Switch>
     </Router>
   );

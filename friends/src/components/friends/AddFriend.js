@@ -54,13 +54,6 @@ const AddFriend = props => {
         onChange={handleChange}
         placeholder='Email'
       />
-      {/* <input
-        name='id'
-        type='number'
-        value={friend.id}
-        onChange={handleChange}
-        placeholder='ID'
-      /> */}
       <button type='submit'>Submit</button>
     </form>
   );
